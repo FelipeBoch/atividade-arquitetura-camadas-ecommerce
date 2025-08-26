@@ -1,10 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.model.item.Item;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +21,8 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "compra_id")
     private List<Item> itens;
     private Timestamp dataCompra;
     private Double valor;
