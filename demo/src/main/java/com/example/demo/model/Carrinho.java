@@ -28,4 +28,5 @@ public class Carrinho {
     private List<Item> itens;
     private Date dataCriacao;
     private StatusCarrinho status;
+    private Long usuarioId;
 }

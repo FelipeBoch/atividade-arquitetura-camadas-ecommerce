@@ -18,15 +18,17 @@ public class CarrinhoController {
 
     //Podemos pedir o id do usuario para encontrar o carrinho
     //Caso o carrinho nao exista, dai criamos o carrinho e retornamos nesse mesmo endpoint
-    @GetMapping
-    public ResponseEntity<Carrinho> buscarCarrinho(){
-        Carrinho response = carrinhoService.buscarCarrinho();
-        return ResponseEntity.ok(response);
+    @GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<Carrinho> buscarOuCriarCarrinho(@PathVariable Long usuarioId) {
+        Carrinho carrinho = carrinhoService.buscarOuCriarCarrinho(usuarioId);
+        return ResponseEntity.ok(carrinho);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Carrinho> adicionarItem(@RequestBody Item item){
-        Carrinho response = carrinhoService.adicionarAoCarrinho(item);
+    public ResponseEntity<Carrinho> adicionarItem(
+            @PathVariable("id") Long carrinhoId,
+            @RequestBody Item item) {
+        Carrinho response = carrinhoService.adicionarAoCarrinho(carrinhoId, item);
         return ResponseEntity.ok(response);
     }
 
